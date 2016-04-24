@@ -1,0 +1,11 @@
+*~
+.\#*
+\#*\#
+*.iml
+.DS_Store
+._*
+/build
+/.classpath
+/.project
+/.settings
+/eclipse-bin

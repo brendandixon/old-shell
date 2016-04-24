@@ -1,0 +1,162 @@
+#---------------------------------------------------------------------------------------
+# Set up standard BASH variables
+#---------------------------------------------------------------------------------------
+# export AWS_ACCESS_KEY_ID='xxxxx'
+# export AWS_CONFIG_FILE='~/.aws_config'
+# export AWS_SECRET_KEY='xxxxxx'
+# export AWS_SECRET_ACCESS_KEY='xxxxxx'
+
+export ACCESS_KEY_ID='xxxxxx'
+export SECRET_ACCESS_KEY='xxxxx'
+export AWS_ACCOUNT_ID='xxxxx'
+
+export AWS_CREDENTIAL_FILE=$HOME/.aws/.aws_credentials
+
+export EDITOR="subl"
+export HISTIGNORE=' *:&'
+export LESS='-FRnqSX'
+export PATH=$CS_HOME/bin:/usr/local/share/python:/Users/dixonb/Code/sloccount-2.26:/Users/dixonb/Code/aws/AWS-ElasticBeanstalk-CLI-2.3/eb/linux/python2.7:/usr/local/bin:/usr/local/sbin:$PATH
+export TERM=xterm-color
+
+# export JAVA_HOME=/usr
+# export JIRA_HOME=/Users/dixonb/.jira
+export JAVA_HOME=$(/usr/libexec/java_home -v '1.7*')
+export RBENV_ROOT=/usr/local/rbenv
+export PATH="$RBENV_ROOT/bin:$PATH"
+
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
+source /usr/local/etc/bash_completion.d/git-completion.bash
+
+if [ "$USER" = "root" ]
+then
+export PS1='\[\e[0;31m\][\u@\h:\W$(__git_ps1 " (\e[35m%s\e[36m)")] \$ \[\e[m\]'
+else
+export PS1='\[\e[0;36m\][\h:\W$(__git_ps1 " (\e[35m%s\e[36m)")] \$ \[\e[m\]'
+fi
+export PS2='>'
+
+export LC_CTYPE=en_US.UTF-8
+
+# #---------------------------------------------------------------------------------------
+# Set up LS colors
+#
+# a - black      A - bold black (usually dark grey)
+# b - red        B - bold red
+# c - green      C - bold green
+# d - brown      D - bold brown (usually yellow)
+# e - blue       E - bold blue
+# f - magenta    F - bold magenta
+# g - cyan       G - bold cyan
+# h - light grey H - bold light grey (usually white)
+# x - default
+# 
+# 1 - Directory
+# 2 - Symbolic link
+# 3 - Socket
+# 4 - Pipe
+# 5 - Executable
+# 6 - Block special
+# 7 - Character special
+# 8 - Executable with setuid bit set
+# 9 - Executable with setgid bit set
+# 10 - Directory, writeable to others, with sticky
+# 11 - Directory, writeable to others, without sticky
+#
+# Defaults -     exfxcxdxbxegedabagacad
+#---------------------------------------------------------------------------------------
+export LSCOLORS='gxexxxxxfxxxxxfxfxgxgx'
+export CLICOLOR=true
+
+#---------------------------------------------------------------------------------------
+# Handy functions
+#---------------------------------------------------------------------------------------
+function getPID()
+{
+    ps ax | grep "$@"
+}
+
+function pp()
+{
+    popd >/dev/null 2>/dev/null
+    if [ $? -eq 1 ] ; then
+        cd ~
+    fi
+}
+
+function pd()
+{
+    pushd "$@" >/dev/null
+}
+
+function gbb()
+{
+  git branch --set-upstream $@ origin/$@
+}
+
+#---------------------------------------------------------------------------------------
+# Set up aliases
+#---------------------------------------------------------------------------------------
+
+alias ic='cd ~/Dropbox/Interview/Code'
+alias rh='cd /Volumes/RHEL'
+alias tk='cd ~/Code/aws/tracker'
+
+alias smm='sshfs_mount -m'
+alias smu='sshfs_mount -u'
+
+alias bsr="bundle exec rspec"
+alias be="bundle exec"
+alias bo="bundle open"
+alias fm="bundle exec foreman start"
+alias rc="bundle exec rails c"
+
+alias fl='fc -l'
+
+alias l='less'
+
+alias ll='ls -lF'
+alias la='ls -AlF'
+
+alias flushc='dscacheutil -flushcache'
+
+# Git aliases
+alias gcb='git clone ssh://git.amazon.com:2222/pkg/'
+alias gup='git push'
+alias gdl='git pull'
+alias ga='git add'
+alias gc='git commit'
+alias gf='git fetch'
+alias gh='git help'
+alias gi='git init'
+# alias gl='git log'
+alias glog='git log --date-order --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
+alias gl='glog --graph'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gdh='git diff HEAD'
+alias gb='git branch'
+alias gbl='git blame -L'
+alias gt='git tag'
+alias gm='git merge'
+alias gs='git status'
+alias go='git checkout'
+alias gr='git-review'
+alias gss='git stash save'
+alias gsa='git stash apply'
+alias gsp='git stash pop'
+alias gsl='git stash list'
+alias gsc='git stash clear'
+alias gbd='git checkout brendan.dixon'
+
+alias ?='pwd'
+
+# [ -d $HOME/.rbenv/shims ] && export PATH=$HOME/.rbenv/shims:$PATH
+
+SSHFS_DIR="$HOME/${USER}.desktop.amazon.com"
+alias mrhel="sshfs -p 22 ${USER}@${USER}.desktop.amazon.com:/ $SSHFS_DIR -o auto_cache,reconnect,defer_permissions,noappledouble,negative_vncache,volname=RHEL5_Desktop,transform_symlinks,follow_symlinks"
+alias urhel="umount $SSHFS_DIR"
+
+[[ -s "$HOME/.initaws" ]] && source "$HOME/.initaws"
+eval "$(rbenv init -)"

@@ -1,0 +1,26 @@
+[color]
+	ui = true
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[core]
+	pager = less -FMRiX
+	excludesfile = ~/.gitignore
+	editor = emacs
+[user]
+	name = Brendan Dixon
+	email = dixonb@amazon.com
+[alias]
+	st = status
+	di = diff
+	dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%ar%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+[push]
+	default = simple
+[merge]
+	conflictstyle = diff3
+[rerere]
+	enabled = 1
+[amazon]
+	append-cr-url = true
+	pull-request-by-default = false
